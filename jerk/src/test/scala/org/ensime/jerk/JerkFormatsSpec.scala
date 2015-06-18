@@ -190,10 +190,10 @@ class JerkFormatsSpec extends FlatSpec with Matchers
 
     roundtrip(
       SymbolDesignationsReq(
-        file1, 1, 100,
+        SourceFileInfo(file1), 1, 100,
         List(ObjectSymbol, ValSymbol)
       ): RpcRequest,
-      """{"requestedTypes":[{"typehint":"ObjectSymbol"},{"typehint":"ValSymbol"}],"typehint":"SymbolDesignationsReq","end":100,"file":"/abc/def","start":1}"""
+      """{"requestedTypes":[{"typehint":"ObjectSymbol"},{"typehint":"ValSymbol"}],"typehint":"SymbolDesignationsReq","end":100,"file":{"file":"/abc/def"},"start":1}"""
     )
 
     roundtrip(

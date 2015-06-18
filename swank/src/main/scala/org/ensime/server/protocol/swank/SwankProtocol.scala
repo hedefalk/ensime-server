@@ -271,8 +271,8 @@ class SwankProtocol(
       syncApi.cancelRefactor(procId)
       sendRPCReturn(true, callId)
 
-    case SymbolDesignationsReq(filename, start, end, requestedTypes) =>
-      val res = syncApi.symbolDesignations(filename, start, end, requestedTypes)
+    case SymbolDesignationsReq(fileInfo, start, end, requestedTypes) =>
+      val res = syncApi.symbolDesignations(fileInfo, start, end, requestedTypes)
       sendRPCReturn(res, callId)
 
     case ExpandSelectionReq(filename, start, end) =>

@@ -36,7 +36,7 @@ class BasicWorkflow extends WordSpec with Matchers
 
           //-----------------------------------------------------------------------------------------------
           // semantic highlighting
-          val designations = project.symbolDesignations(fooFile, -1, 299, SourceSymbol.allSymbols)
+          val designations = project.symbolDesignations(SourceFileInfo(fooFile), -1, 299, SourceSymbol.allSymbols)
           designations.file shouldBe fooFile
           assert(designations.syms.contains(SymbolDesignation(12, 19, PackageSymbol)))
           // expected Symbols

@@ -56,9 +56,9 @@ trait ProjectEnsimeApiImpl extends EnsimeApi { self: Project =>
     new ReplConfig(config.runtimeClasspath)
   }
 
-  override def symbolDesignations(file: File, start: Int, end: Int,
+  override def symbolDesignations(fileInfo: SourceFileInfo, start: Int, end: Int,
     requestedTypes: List[SourceSymbol]): SymbolDesignations = {
-    callRPC[SymbolDesignations](getAnalyzer, SymbolDesignationsReq(file, start, end, requestedTypes))
+    callRPC[SymbolDesignations](getAnalyzer, SymbolDesignationsReq(fileInfo, start, end, requestedTypes))
   }
 
   override def debugStartVM(commandLine: String): DebugVmStatus = {

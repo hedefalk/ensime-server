@@ -236,11 +236,11 @@ class Analyzer(
                 sender ! scalaCompiler.askTypeInfoByNameAt(name, p)
               case CallCompletionReq(id: Int) =>
                 sender ! scalaCompiler.askCallCompletionInfoById(id)
-              case SymbolDesignationsReq(f, start, end, tpes) =>
-                if (!FileUtils.isScalaSourceFile(f)) {
-                  sender ! SymbolDesignations(f, List.empty)
+              case SymbolDesignationsReq(fileInfo, start, end, tpes) =>
+                if (!FileUtils.isScalaSourceFile(fileInfo.file)) {
+                  sender ! SymbolDesignations(fileInfo.file, List.empty)
                 } else {
-                  val sf = createSourceFile(f)
+                  val sf = createSourceFile(fileInfo)
                   val clampedEnd = math.max(end, start)
                   val pos = new RangePosition(sf, start, start, clampedEnd)
                   if (tpes.nonEmpty) {

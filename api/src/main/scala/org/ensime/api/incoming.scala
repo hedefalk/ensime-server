@@ -112,7 +112,7 @@ case class CancelRefactorReq(procId: Int) extends RpcRefactorRequest
 // related to discovery of the user's context
 sealed trait RpcContextRequest extends RpcRequest
 case class SymbolDesignationsReq(
-  file: File,
+  file: SourceFileInfo,
   start: Int,
   end: Int,
   requestedTypes: List[SourceSymbol]

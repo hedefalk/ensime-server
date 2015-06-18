@@ -43,7 +43,7 @@ trait EnsimeApi {
    * Return:
    *   SymbolDesignations The given
    */
-  def symbolDesignations(f: File, start: Int, end: Int, requestedTypes: List[SourceSymbol]): SymbolDesignations
+  def symbolDesignations(f: SourceFileInfo, start: Int, end: Int, requestedTypes: List[SourceSymbol]): SymbolDesignations
 
   /**
    *   Patch the source with the given changes.

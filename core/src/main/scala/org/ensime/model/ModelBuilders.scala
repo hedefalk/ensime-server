@@ -335,8 +335,10 @@ object OffsetSourcePositionHelper {
 
   def fromPosition(p: Position): Option[OffsetSourcePosition] = p match {
     case NoPosition => None
-    case realPos =>
-      Some(new OffsetSourcePosition(File(realPos.source.file.path).canon, realPos.point))
+    case realPos => {
+      Some(new OffsetSourcePosition(File(realPos.source.file.path).canon, realPos.point,
+        Some(realPos.line), Some(realPos.column)))
+    }
   }
 }
 
@@ -353,4 +355,3 @@ object BasicTypeInfo {
       case _ => None
     }
 }
-

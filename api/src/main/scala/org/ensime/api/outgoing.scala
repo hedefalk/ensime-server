@@ -233,7 +233,8 @@ case object PosNeededYes extends PosNeeded
 
 sealed trait SourcePosition extends RpcResponse
 final case class EmptySourcePosition() extends SourcePosition
-final case class OffsetSourcePosition(file: File, offset: Int) extends SourcePosition
+final case class OffsetSourcePosition(file: File, offset: Int,
+  row: Option[Int] = None, col: Option[Int] = None) extends SourcePosition
 final case class LineSourcePosition(file: File, line: Int) extends SourcePosition
 
 final case class PackageInfo(

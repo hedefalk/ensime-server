@@ -65,7 +65,7 @@ class RichPresentationCompilerSpec extends EnsimeSpec
         "object Abc { def main { Bla @2@!@3@ 0 } }") { (p, label, cc) =>
           val sym = cc.askSymbolInfoAt(p).get
           inside(sym.declPos) {
-            case Some(OffsetSourcePosition(f, i)) =>
+            case Some(OffsetSourcePosition(f, i, Some(row), Some(col))) =>
               i should be > 0
           }
         }
@@ -84,9 +84,10 @@ class RichPresentationCompilerSpec extends EnsimeSpec
         "object Bla { val x = 1 @0@+ 1 }") { (p, label, cc) =>
           val sym = cc.askSymbolInfoAt(p).get
           inside(sym.declPos) {
-            case Some(OffsetSourcePosition(f, i)) =>
+            case Some(OffsetSourcePosition(f, i, Some(row), Some(col))) =>
               f.parts should contain("Int.scala")
               i should be > 0
+              row should be >= 0
           }
         }
     }
@@ -103,7 +104,9 @@ class RichPresentationCompilerSpec extends EnsimeSpec
           sym.name shouldBe "fn"
           sym.localName shouldBe "fn"
           inside(sym.declPos) {
-            case Some(OffsetSourcePosition(f, i)) => i should be > 0
+            case Some(OffsetSourcePosition(f, i, Some(row), Some(col))) =>
+              i should be > 0
+              row should be >= 0
           }
         }
     }
@@ -125,7 +128,7 @@ class RichPresentationCompilerSpec extends EnsimeSpec
           sym.name shouldBe "apply"
           sym.localName shouldBe "apply"
           inside(sym.declPos) {
-            case Some(OffsetSourcePosition(f, i)) => i should be > 0
+            case Some(OffsetSourcePosition(f, i, Some(row), Some(col))) => i should be > 0
           }
         }
     }
@@ -148,7 +151,7 @@ class RichPresentationCompilerSpec extends EnsimeSpec
           sym.name shouldBe "copy"
           sym.localName shouldBe "copy"
           inside(sym.declPos) {
-            case Some(OffsetSourcePosition(f, i)) => i should be > 0
+            case Some(OffsetSourcePosition(f, i, Some(row), Some(col))) => i should be > 0
           }
         }
     }

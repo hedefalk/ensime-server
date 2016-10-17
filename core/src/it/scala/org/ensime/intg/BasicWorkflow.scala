@@ -137,7 +137,7 @@ class BasicWorkflow extends EnsimeSpec
             case SymbolInfo(
               "testMethod",
               "testMethod",
-              Some(OffsetSourcePosition(`fooFile`, 114)),
+              Some(OffsetSourcePosition(`fooFile`, 114, None, None)),
               ArrowTypeInfo(
                 "(Int, String) => Int",
                 "(scala.Int, java.lang.String) => scala.Int",
@@ -154,13 +154,13 @@ class BasicWorkflow extends EnsimeSpec
           // M-.  external symbol
           project ! SymbolAtPointReq(Left(fooFile), 190)
           expectMsgPF() {
-            case SymbolInfo("Map", "Map", Some(OffsetSourcePosition(_, _)),
+            case SymbolInfo("Map", "Map", Some(OffsetSourcePosition(_, _, None, None)),
               BasicTypeInfo("Map", DeclaredAs.Object, "scala.collection.immutable.Map")) =>
           }
 
           project ! SymbolAtPointReq(Left(fooFile), 343)
           expectMsgPF() {
-            case SymbolInfo("fn", "fn", Some(OffsetSourcePosition(`fooFile`, 304)),
+            case SymbolInfo("fn", "fn", Some(OffsetSourcePosition(`fooFile`, 304, None, None)),
               api.BasicTypeInfo("(String) => Int", DeclaredAs.Trait, "(java.lang.String) => scala.Int",
                 List(
                   BasicTypeInfo("String", DeclaredAs.Class, "java.lang.String"),
@@ -170,7 +170,7 @@ class BasicWorkflow extends EnsimeSpec
 
           project ! SymbolAtPointReq(Left(barFile), 150)
           expectMsgPF() {
-            case SymbolInfo("apply", "apply", Some(OffsetSourcePosition(`barFile`, 59)),
+            case SymbolInfo("apply", "apply", Some(OffsetSourcePosition(`barFile`, 59, None, None)),
               ArrowTypeInfo("(String, Int) => Foo", "(java.lang.String, scala.Int) => org.example.Bar.Foo",
                 BasicTypeInfo("Foo", DeclaredAs.Class, "org.example.Bar.Foo"),
                 List(ParamSectionInfo(
@@ -182,7 +182,7 @@ class BasicWorkflow extends EnsimeSpec
 
           project ! SymbolAtPointReq(Left(barFile), 193)
           expectMsgPF() {
-            case SymbolInfo("copy", "copy", Some(OffsetSourcePosition(`barFile`, 59)),
+            case SymbolInfo("copy", "copy", Some(OffsetSourcePosition(`barFile`, 59, None, None)),
               ArrowTypeInfo("(String, Int) => Foo", "(java.lang.String, scala.Int) => org.example.Bar.Foo",
                 BasicTypeInfo("Foo", DeclaredAs.Class, "org.example.Bar.Foo"),
                 List(ParamSectionInfo(
@@ -194,7 +194,7 @@ class BasicWorkflow extends EnsimeSpec
 
           project ! SymbolAtPointReq(Left(fooFile), 600)
           expectMsgPF() {
-            case SymbolInfo("poly", "poly", Some(OffsetSourcePosition(`fooFile`, 548)),
+            case SymbolInfo("poly", "poly", Some(OffsetSourcePosition(`fooFile`, 548, None, None)),
               ArrowTypeInfo("(A, B) => (A, B)", "(org.example.WithPolyMethod.A, org.example.WithPolyMethod.B) => (org.example.WithPolyMethod.A, org.example.WithPolyMethod.B)",
                 api.BasicTypeInfo(
                   "(A, B)", DeclaredAs.Class, "(org.example.WithPolyMethod.A, org.example.WithPolyMethod.B)",
